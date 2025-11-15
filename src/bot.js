@@ -5,7 +5,8 @@ const { token, mongoURI, worldTickInterval } = require('./config');
 const { Country, Guild, Player, WorldLog } = require('./database/models');
 const { startWorldTick } = require('./systems/worldTick');
 const countriesData = require('./utils/countries');
-
+const { registerCommands } = require('./utils/registerCommands');
+require('dotenv').config();
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
 ////////////////////////
@@ -37,6 +38,7 @@ async function initializeCountries() {
 ////////////////////////
 client.once('ready', () => {
   console.log(`[BOT] ${client.user.tag} aktif!`);
+  await registerCommands(process.env.CLIENT_ID, process.env.GUILD_ID, process.env.BOT_TOKEN);
   // World tick sistemini başlat
   startWorldTick();
 });
