@@ -1,0 +1,35 @@
+{
+  "name": "discord-world-war-bot",
+  "version": "1.0.0",
+  "description": "Discord bot for a World War themed game. Guilds choose countries, build armies, manage resources and fight for global domination.",
+  "main": "src/bot.js",
+  "scripts": {
+    "start": "node src/bot.js",
+    "dev": "nodemon src/bot.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/username/discord-world-war-bot.git"
+  },
+  "keywords": [
+    "discord",
+    "bot",
+    "game",
+    "world-war",
+    "strategy"
+  ],
+  "author": "Asim R",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "chalk": "^5.3.0",
+    "discord.js": "^14.15.0",
+    "mongoose": "^7.5.0",
+    "dotenv": "^16.4.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.3"
+  }
+}
