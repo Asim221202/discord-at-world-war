@@ -24,9 +24,11 @@ const Country = mongoose.model('Country', CountrySchema);
 ///////////////////////
 const GuildSchema = new mongoose.Schema({
   guildId: { type: String, required: true, unique: true },
+  
   name: { type: String, required: true },
   countryId: { type: String, required: true }, // Hangi ülkeye bağlı
-  resources: {
+ language: { type: String, default: 'en' }, // Default English
+   resources: {
     food: { type: Number, default: 1000 },
     steel: { type: Number, default: 500 },
     oil: { type: Number, default: 300 },
