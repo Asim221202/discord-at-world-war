@@ -44,9 +44,33 @@ client.once('ready', () => {
 ////////////////////////
 // guildCreate event
 ////////////////////////
-client.on('guildCreate', guild => {
-  console.log(`[GUILD] Bot eklendi: ${guild.name} (${guild.id})`);
-  // Burada ülke seçme paneli ilerleyen adımda gelecek
+// bot.js (guildCreate)
+const { createEmbed } = require('./utils/embed');
+
+client.on('guildCreate', async guild => {
+  console.log(`[GUILD] Bot added to: ${guild.name} (${guild.id})`);
+
+  // Embed listesi
+  const fields = countriesData.map(country => ({
+    name: `${country.name} (${country.countryId})`,
+    value: `**Bonuses:** Attack: ${country.bonus.attack}, Defense: ${country.bonus.defense}, Economy: ${country.bonus.economy}\n**Max Guilds:** ${country.maxGuilds}`,
+    inline: false
+  }));
+
+  const embed = createEmbed({
+    title: 'Welcome to World War Bot!',
+    description: 'Please select a country for your guild using the `/select-country` command. Here are the available countries:',
+    color: '#00ff99',
+    fields: fields,
+    footer: 'Use /select-country <country_id> to choose your country.'
+  });
+
+  const defaultChannel = guild.channels.cache
+    .filter(c => c.type === 0 && c.permissionsFor(guild.members.me).has('SendMessages'))
+    .first();
+
+  if (defaultChannel) defaultChannel.send({ embeds: [embed] });
+
 });
 
 client.login(token);
