@@ -22,28 +22,30 @@ const Country = mongoose.model('Country', CountrySchema);
 ///////////////////////
 // Guild Model
 ///////////////////////
+
 const GuildSchema = new mongoose.Schema({
   guildId: { type: String, required: true, unique: true },
-  
   name: { type: String, required: true },
-  countryId: { type: String, required: true }, // Hangi ülkeye bağlı
- language: { type: String, default: 'en' }, // Default English
-   resources: {
-    food: { type: Number, default: 1000 },
-    steel: { type: Number, default: 500 },
-    oil: { type: Number, default: 300 },
-    manpower: { type: Number, default: 200 }
+  countryId: { type: String },
+  language: { type: String, default: 'en' },
+
+  resources: {
+    food: { type: Number, default: 100 },
+    steel: { type: Number, default: 50 },
+    oil: { type: Number, default: 30 },
+    manpower: { type: Number, default: 50 }
   },
+
   army: {
-    infantry: { type: Number, default: 0 },
-    armor: { type: Number, default: 0 },
-    air: { type: Number, default: 0 }
-  },
-  alliances: [{ type: String }], // Diğer guildId’ler
-  lastTurnProcessed: { type: Date, default: Date.now }
+    infantry: { type: Number, default: 10 },
+    armor: { type: Number, default: 5 },
+    air: { type: Number, default: 2 }
+  }
 });
 
 const Guild = mongoose.model('Guild', GuildSchema);
+
+module.exports = { Guild };
 
 ///////////////////////
 // Player Model
