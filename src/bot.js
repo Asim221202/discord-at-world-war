@@ -47,10 +47,13 @@ client.once('ready', () => {
 // bot.js (guildCreate)
 const { createEmbed } = require('./utils/embed');
 
+// bot.js (guildCreate event)
+const { initializeGuild } = require('./systems/initializeGuild');
+
 client.on('guildCreate', async guild => {
   console.log(`[GUILD] Bot added to: ${guild.name} (${guild.id})`);
 
-  // Embed listesi
+  // Embed mesajı
   const fields = countriesData.map(country => ({
     name: `${country.name} (${country.countryId})`,
     value: `**Bonuses:** Attack: ${country.bonus.attack}, Defense: ${country.bonus.defense}, Economy: ${country.bonus.economy}\n**Max Guilds:** ${country.maxGuilds}`,
@@ -71,6 +74,7 @@ client.on('guildCreate', async guild => {
 
   if (defaultChannel) defaultChannel.send({ embeds: [embed] });
 
+  // NOT: Guild henüz ülke seçmedi, resources ve army country bonus ile sonra initialize edilecek
 });
 
 client.login(token);
